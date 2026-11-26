@@ -1,0 +1,22 @@
+name: Build Figo4 EXE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-figo4:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Compile C++ menjadi EXE (figo4)
+        run: g++ -static "figo4.cpp" -o "figo4.exe"
+
+      - name: Upload file EXE (figo4)
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-figo4
+          path: "figo4.exe"
